@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import MediaQuery,{ useMediaQuery } from 'react-responsive'
-import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div style={styles.app}>
          
         <div style={styles.dropdown} onClick={() => this.setIsShown()}>
           <span>{`Select Project : `}</span>
@@ -48,7 +47,7 @@ class App extends Component {
 
         <MediaQuery minDeviceWidth={1224}>
         <div style={styles.todoListDisplayPannel}>
-          <ul className="list">
+          <ul style={styles.list}>
             {this.state.selectedProject != null ? (
               this.state.data[this.state.selectedProject].tasks.map(
                 (item, index) => {
@@ -63,7 +62,7 @@ class App extends Component {
         </MediaQuery>
         <MediaQuery maxDeviceWidth={800}>
         <div style={styles.todoListDisplayPannelMobile}>
-          <ul className="list">
+          <ul style={styles.list}>
             {this.state.selectedProject != null ? (
               this.state.data[this.state.selectedProject].tasks.map(
                 (item, index) => {
@@ -178,48 +177,17 @@ const styles={
     display: 'inline-block',
     color:'white'
   },
-
-  dropdownMobile:{
-    position: 'relative',
-    display: 'block',
-    padding:'0px',
-    margin:'0px'
-  },
-  
-  dropDownItem:{
-    padding: '12px 16px'
-  },
-  dropDownItemHover:{
-    padding: '12px 16px',
-    backgroundColor: '#61dafb'
-  },
-  
-  dropdownContent :{
-    position: 'absolute',
-    backgroundColor: '#f9f9f9',
-    minWidth: '160px',
-    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-    maxHeight:'200px',
-    overflowY:'scroll',
-    zIndex: 'auto'
-  },
-  dropdownContentMobile:{
-    display: 'block',
-    margin:'0px',
-    // backgroundColor: '#f9f9f9',
+  app :{
+    textAlign:'center',
+    paddingTop: '10px',
+    paddingBottom: '10px',
     width:'100%',
-    // boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-    
-    zIndex: '1'
+    margin: '0px',
+    marginLeft: '0px',
+    /* padding:0px; */
+    /* overflow-y: auto; */
+    backgroundColor: '#282c34'
   }
-  
-  // dropdown:  {
-  //   display: 'block'
-  // },
-  // dropdownContent:{
-  //   display: 'block'
-  // }
-    
 }
 
 export default App;
