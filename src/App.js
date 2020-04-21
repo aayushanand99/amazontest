@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import MediaQuery,{ useMediaQuery } from 'react-responsive'
 
-var placeholder = document.createElement("li");
-placeholder.className = "placeholder";
+
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +38,6 @@ class App extends Component {
 
   dragEnd=(e)=> {
     this.dragged.style.display = 'block';
-    this.dragged.parentNode.removeChild(placeholder);
     var data = this.state.data[this.state.selectedProject].tasks;
     var from = Number(this.dragged.dataset.id);
     var to = Number(this.over.dataset.id);
@@ -53,9 +51,7 @@ class App extends Component {
   dragOver=(e)=> {
     e.preventDefault();
     this.dragged.style.display = "none";
-    if(e.target.className === 'placeholder') return;
     this.over = e.target;
-    e.target.parentNode.insertBefore(placeholder, e.target);
   }
   
 
