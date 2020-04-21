@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import MediaQuery,{ useMediaQuery } from 'react-responsive'
 
+var placeholder = document.createElement("li");
+placeholder.className = "placeholder";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +31,32 @@ class App extends Component {
     this.setState({ selectedProject: event.target.value });
   };
 
+  dragStart=(e)=>{
+    this.dragged = e.currentTarget;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.dragged);
+  }
+
+  dragEnd=(e)=> {
+    this.dragged.style.display = 'block';
+    this.dragged.parentNode.removeChild(placeholder);
+    var data = this.state.data[this.state.selectedProject].tasks;
+    var from = Number(this.dragged.dataset.id);
+    var to = Number(this.over.dataset.id);
+    if(from < to) to--;
+    data.splice(to, 0, data.splice(from, 1)[0]);
+    let temp=this.state.data
+    temp[this.state.selectedProject].tasks=data
+    this.setState({data: temp});
+  }
+
+  dragOver=(e)=> {
+    e.preventDefault();
+    this.dragged.style.display = "none";
+    if(e.target.className === 'placeholder') return;
+    this.over = e.target;
+    e.target.parentNode.insertBefore(placeholder, e.target);
+  }
   
 
   render() {
@@ -51,7 +80,7 @@ class App extends Component {
             {this.state.selectedProject != null ? (
               this.state.data[this.state.selectedProject].tasks.map(
                 (item, index) => {
-                  return <ListItem key={index} item={item} />;
+                  return <ListItem key={index} item={item} dragStart={this.dragStart} dragEnd={this.dragEnd} dragOver={this.dragOver} index={index}/>;
                 }
               )
             ) : (
@@ -84,7 +113,7 @@ const ListItem = (props) => {
   const isTabletOrMobile = useMediaQuery({ maxDeviceWidth: 500 })
   if(isTabletOrMobile){
   return (
-    <div style={styles.taskDivMobile}>
+    <div style={styles.taskDivMobile} draggable={true}>
       <input
         type="checkbox"
         style={styles.checkBox}
@@ -95,7 +124,7 @@ const ListItem = (props) => {
   );
   }else{
     return (
-      <div style={styles.taskDiv}>
+      <div style={styles.taskDiv} draggable={true} onDragStart={props.dragStart} onDragEnd={props.dragEnd} onDragOver={props.dragOver}  data-id={props.index}>
         <input
           type="checkbox"
           style={styles.checkBox}
