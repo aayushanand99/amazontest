@@ -1,5 +1,75 @@
 .App {
-  text-align: center;
+  text-align:center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width:100%;
+  margin: 0px;
+  margin-left: 0px;
+  /* padding:0px; */
+  /* overflow-y: auto; */
+  background-color: #282c34;
+}
+.todoListDisplayPannel {
+width: 40%;
+height:70%;
+overflow-y:scroll;
+background-color: #282c34;
+align-self: center;
+left:30%;
+margin-top: 20px;
+position: absolute;
+color: #61dafb;
+align-items: center;
+justify-content: center;
+}
+.list{
+  margin: 0px;
+  padding: 0px;
+}
+
+.taskDiv{
+  width: 80%;
+  padding-top:5%;
+  padding-bottom: 5%;
+  background-color: green;
+  margin-left: 10%;
+  border-radius: 10px;
+  margin-top: 10px;
+  border-width: 2px;
+  border-style: double;
+  border-color: #61dafb;
+  justify-content: space-around;
+}
+
+.checkBox{
+  float: left;
+  margin-left: 30px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropDownItem{
+  padding: 12px 16px;
+}
+.dropDownItem:hover{
+  background-color: #61dafb;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .App-logo {
